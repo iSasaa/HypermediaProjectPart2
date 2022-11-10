@@ -1,0 +1,115 @@
+body{
+   width: 600px;
+   font-family:Verdana,Arial, serif;
+}
+
+h2{
+   font-family:Georgia, Times, serif;
+   font-style:italic;
+   background-color:#efefef;
+   width: 620px;
+}
+
+strong{
+   color: #782F2B;
+}
+
+.header {
+   font-family:Georgia, Times, serif;
+   font-size:120%;
+   background-color:#782F2B;
+   color: #FF7B5C;
+   margin: 0px 0px 100px 0px;
+   padding: 10px;
+   width: 100%;
+   height: 100px;
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   z-index:100;
+}
+
+.introInfo{
+   margin-top: 120px;
+   padding: 10px;
+}
+.introInfo .label{
+   font-style: italic;
+   vertical-align: top;
+}
+
+.introInfo button{
+   margin-right: 20px;
+   padding: 3px;
+}
+
+.matchSummary{
+    float:none;
+	font-weight:bold;
+	list-style: none;
+
+}
+.marker li{
+	display: inline;
+}
+
+.marker{
+	width:100%;
+	text-align: center;
+}
+
+.teamMarker{
+    float:left;
+	width:150px;
+	text-align: center;
+}
+
+.teamMarker p{
+	font-size:200%;
+	font-weight:bold;
+}
+
+.tableSummary{
+	margin-top:250px;
+}
+
+p{
+   font-family:Verdana,Arial, serif;
+}
+
+table {
+   font-size: 80%;
+   width: 580px;
+   text-align:center;
+   border-spacing: 0px;
+   border-collapse: collapse;
+   }
+
+th, td {
+   padding: 7px 10px 10px 10px;
+   border: 1px solid #782F2B;
+   }
+
+th {
+   text-transform: uppercase;
+   letter-spacing: 0.1em;
+   font-size: 90%;
+   background-color: #FF7B5C;
+   color:#782F2B;
+   text-align: center;
+}
+
+.tableSummary th:nth-child(1) {
+  width: 50px;
+  }
+
+.tableSummary th:nth-child(2) {
+  width: 500px;
+}
+
+tr:hover {
+   background-color: #E5C8FF;}
+
+.score{
+  display: inline;
+}

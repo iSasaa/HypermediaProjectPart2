@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mastermind</title>
+    <link rel="stylesheet" type="text/css" href="Mastermind.css">
+    <script src="game.js"></script>
+
+</head>
+<body onload="load()">
+    <div class="header"><h1></h1></div>
+    <div class="introInfo">
+	   <h2></h2>
+	   <p><span class="label" id="NameSpan">Name:</span><input type="text" id="Name" /></p>
+     <p><button id="Start" onclick="start()">Play</button></p>
+     <!-- <p><button id="Goal1" onclick="score1()">Goal Team 1</button> -->
+	   <!-- <button id="AddComment" onclick="addComment()">Add Comment</button> -->
+	   <!-- <button id="Goal2" onclick="score2()">Goal Team 2</button> -->
+	   <!-- <button id="End" onclick="matchEnd()">Match End</button></p> -->
+     <div id="Part2">
+       <p style="display:inline">Wins: </p><p class="score">0</p>
+       <p style="display:inline">, Loses: </p><p class="score">0</p>
+       <p id="Probes">0</p>
+
+       <p style="display:inline">Round <p class="score" id="RoundNumber">0</p>
+       : <input class="label" type="text" id="Round" /></p>
+       <p><button id="Guess" onclick="guess()">Guess!</button></p>
+     </div>
+  </body>
+</html>
