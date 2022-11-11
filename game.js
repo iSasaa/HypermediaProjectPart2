@@ -1,8 +1,10 @@
 function Game(round, number, correct, semicorrect){
 	this.round = round;
 	this.number = number;
-	this.correct = correct;
-	this.semicorrect = correct;
+	this.correct = 0;
+	this.semicorrect = 0;
+	this.wins = 0;
+	this.loses = 0;
 }
 var Game1 = new Game(0, 0, 0, 0);
 
@@ -53,23 +55,59 @@ var Game1 = new Game(0, 0, 0, 0);
 		    ranNums.push(nums[j]);
 		    nums.splice(j,1);
 		}
-		number = ranNums.slice(0, 4);;
+		number = ranNums.slice(0, 4);
 		console.log(number);
 		var secret_number = document.getElementById("Probes");
 		//number = ('0000'+number).slice(-4);
 		secret_number.innerHTML = number;
+		Game1.number = number
 	}
 
 	function play(){
 		document.getElementById("Part2").style.display = "";
-
 	}
 
 	function guess(){
 		var round = document.getElementById("RoundNumber");
 		Game1.round ++;
+		if(Game1.round > 10){
+			throw new Error("Something went badly wrong!");
+		};
 		round.innerHTML = Game1.round;
+		var new_number = document.getElementById("Round").value;
+		var roundinput = document.getElementById("Round");
+		var wins = document.getElementById("wins");
+		let secret_number = Game1.number;
+		new_number = Array.from(new_number);
+		var number_array = [];
+		for(var i = 0; i < new_number.length; i++){
+			number_array.push(parseInt(new_number[i]));
 		}
+		if (secret_number.toString() === number_array.toString()){
+			console.log("Has Guanyat son iguals");
+			Game1.wins++
+			var wins = document.getElementById("wins").innerHTML = Game1.wins ;
+		}
+		else{
+			Game1.semicorrect = 0;
+			Game1.correct = 0;
+			for(var i = 0; i < new_number.length; i++){
+				if(secret_number.includes(number_array[i])){
+					Game1.semicorrect++;
+					if (secret_number[i] == number_array[i]){
+						Game1.correct++;
+						Game1.semicorrect--;
+					}
+				}
+			}
+			console.log(Game1.semicorrect);
+			console.log(Game1.correct)
+
+		}
+		if (roundinput.value != "") {
+            roundinput.value = "";
+        }
+	}
 
 
 	function addTableRow(min, com)

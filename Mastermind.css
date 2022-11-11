@@ -6,7 +6,8 @@ body{
 h2{
    font-family:Georgia, Times, serif;
    font-style:italic;
-   background-color:#efefef;
+   background-color:grey;
+   /* #efefef */
    width: 620px;
 }
 
