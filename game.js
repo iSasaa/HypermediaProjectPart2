@@ -1,4 +1,4 @@
-function Game(round, number, correct, semicorrect) {
+function Game(round, number, correct, semicorrect, wins, loses) {
 	this.round = round;
 	this.number = number;
 	this.correct = 0;
@@ -6,7 +6,7 @@ function Game(round, number, correct, semicorrect) {
 	this.wins = 0;
 	this.loses = 0;
 }
-var Game1 = new Game(0, 0, 0, 0);
+var Game1 = new Game(1, 0, 0, 0);
 
 
 //Creates the start page, and hides the html code referring to the second part
@@ -86,61 +86,55 @@ function random_number() {
 	}
 
 	number = ranNums.slice(0, 4);
-	
-	//S'ha de treure
-	console.log(number);
-	var secret_number = document.getElementById("Probes");
 
+	//If you want see the secret number in console descoment line 91
+	// console.log(number);
 
 	//Set the number to guess
-	secret_number.innerHTML = number;
+	//secret_number.innerHTML = number;
 	Game1.number = number
 }
-
 
 //Shows the part2
 function play() {
 	document.getElementById("Part2").style.display = "";
 }
 
-
 //Runs when Guess! button was clicked
 function guess() {
 
-	//If there are less than 10 rounds, can write again
-	if (Game1.round != 10) {
+	var new_number = document.getElementById("Round").value;
+	var roundinput = document.getElementById("Round");
+	var wins = document.getElementById("wins");
 
-		var round = document.getElementById("RoundNumber");
+	let secret_number = Game1.number;
+	new_number = Array.from(new_number);
+	var number_array = [];
 
-		Game1.round++;
-		if (Game1.round > 10) {
-			throw new Error("Something went badly wrong!");
-		};
-
-		round.innerHTML = Game1.round;
-
-		var new_number = document.getElementById("Round").value;
-		var roundinput = document.getElementById("Round");
-		var wins = document.getElementById("wins");
-
-		let secret_number = Game1.number;
-		new_number = Array.from(new_number);
-		var number_array = [];
+	if (new_number.length > 3 && new_number.length < 5) {
 
 		//Convert the number to integer
+		var replic = false;
 		for (var i = 0; i < new_number.length; i++) {
-			number_array.push(parseInt(new_number[i]));
+				if (number_array.includes(parseInt(new_number[i]))) {
+					replic = true;
+				}
+				else{
+					number_array.push(parseInt(new_number[i]));
+				}
 		}
 
 		//compare if the numbers are equals to the secret number
 		if (secret_number.toString() === number_array.toString()) {
-			Game1.wins++
+			Game1.wins++;
 			var wins = document.getElementById("wins").innerHTML = Game1.wins;
 			alert("Congratulations " + Game1.name + " you have won!");
+			Game1.round = 1;
 			restart();
-		} else {
-			Game1.semicorrect = 0;
+		}
+		else { //discober witch is correct or semicorrect
 			Game1.correct = 0;
+			Game1.semicorrect = 0;
 			for (var i = 0; i < new_number.length; i++) {
 				if (secret_number.includes(number_array[i])) {
 					Game1.semicorrect++;
@@ -150,21 +144,35 @@ function guess() {
 					}
 				}
 			}
-			
-			addTableRow(number_array[0], number_array[1], number_array[2], number_array[3], Game1.correct, Game1.semicorrect);
+			//Condition if we number have any repeated number
+			if (replic == true){
+				var round = document.getElementById("RoundNumber");
+				round.innerHTML = Game1.round;
+				replic == false;
+			}
+			else{ //if number correct condition, print the answer in table
+				var round = document.getElementById("RoundNumber");
+				Game1.round++;
+				addTableRow(number_array[0], number_array[1], number_array[2], number_array[3], Game1.correct, Game1.semicorrect);
+			}
 		}
-		if (roundinput.value != "") {
-			roundinput.value = "";
-		}
-	} else {
+	}
+
+	//clean the input box
+	if (roundinput.value != "") {
+		roundinput.value = "";
+	}
+
+	//If there are less than 10 rounds
+	if (Game1.round <= 10) {
+		var round = document.getElementById("RoundNumber");
+		round.innerHTML = Game1.round;
+	} else { // if you pass than 10 rounds you lose
 		Game1.loses++;
 		var loses = document.getElementById("loses").innerHTML = Game1.loses;
 		alert("Sorry, " + Game1.name + " you have lost!");
+		Game1.round = 1;
 		restart();
-		if (roundinput.value != "") {
-			roundinput.value = "";
-		}
-
 	}
 }
 
@@ -178,9 +186,12 @@ function onlyNumberKey(n) {
 
 //Restarts the game after a win or lose
 function restart() {
-
-	Game1 = new Game(0, 0, 0, 0);
-
+	var roundinput = document.getElementById("Round");
+	if (roundinput.value != "") {
+		roundinput.value = "";
+	}
+	var round = document.getElementById("RoundNumber");
+	RoundNumber.innerHTML = Game1.round;
 	//delete the table rows
 	var nRows = document.getElementById("tableOfNumbers").rows.length;
 	for (let i = 1; i < nRows; i++) {
@@ -196,16 +207,18 @@ function addTableRow(n1, n2, n3, n4, cor, semicor) {
 
 	//Number entered
 	var table = document.getElementById("tableOfNumbers");
-	var row = table.insertRow(Game1.round);
+	var row = table.insertRow(Game1.round-1);
 	var cell1 = row.insertCell(0);
 	var cell2 = row.insertCell(1);
 	var cell3 = row.insertCell(2);
 	var cell4 = row.insertCell(3);
 
+
 	cell1.innerHTML = n1;
 	cell2.innerHTML = n2;
 	cell3.innerHTML = n3;
 	cell4.innerHTML = n4;
+
 
 	//Correct and semicorrect
 	var corImg = row.insertCell(4);
