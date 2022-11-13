@@ -1,3 +1,5 @@
+https://github.com/iSasaa/HypermediaProjectPart2
+
 Primer de tot hem fet un objecte el qual ens ajudara a tenir en tot moment controlat el estat de la partida, victories derrotes,etc...
 Tambe tenim una funcio load que ens mostrara la plana principal del mastermind, al cual trobasrem un element id que se activara i mostrara lo que seria la plana del joc.
 La funcio start fa el canvi anomenat anteriorment, pero pasa de la plana d'inici i la del joc, i tambe inicia el mateix a partir de la funcio play().
